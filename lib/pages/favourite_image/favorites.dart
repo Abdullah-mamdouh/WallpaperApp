@@ -34,78 +34,65 @@ class _CollectionsState extends State<Favorites> {
     myPhotos = Provider.of<ProviderHelper>(context).getFavoriteImages;
 
     return Scaffold(
-        body: Stack(
-      children: [
-        Scaffold(
-            //extendBodyBehindAppBar: true,
-            appBar: AppBar(
-              elevation: 0,
-              toolbarHeight: 65,
-              backgroundColor: Theme.of(context).cardColor.withOpacity(0.8),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(50),
-                ),
-              ),
-              title: Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10),
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          'https://images.pexels.com/photos/3536991/pexels-photo-3536991.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
-                      //backgroundColor: Colors.transparent,
-                    ),
-                  ),
-                  Text(
-                    "Abdullah ",
-                    style: Theme.of(context).textTheme.headline6,
-                  )
-                ],
-              ),
-              actions: [
-                Container(
-                  child: ChangeThemeButtonWidget(),
-                  margin: EdgeInsets.all(3),
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                      borderRadius: BorderRadius.circular(50)),
-                ),
-              ],
+        //extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          elevation: 0,
+          toolbarHeight: 65,
+          backgroundColor: Theme.of(context).cardColor.withOpacity(0.8),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(50),
             ),
-            body: myPhotos!.isEmpty
-                ? EmptyPage()
-                : Container(
-                    margin: EdgeInsets.only(top: 10),
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: StaggeredGridView.countBuilder(
-                      primary: false,
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 15,
-                      crossAxisSpacing: 15,
-                      itemCount: myPhotos!.length,
-                      itemBuilder: (context, index) {
-                        var photo = myPhotos![index];
-                        return SlideFadeAnimation(
-                            index: index,
-                            animationDuration: 2000,
-                            verticalOffset: 200,
-                            child:
-                                FavoriteCardImage(index: index, photo: photo));
-                        /*ImageCard(
-                photo: photo,
-                imageDetail: photo.src!.large2x!,
-                imageUrl: photo.src!.medium!,
-                photographer: photo.photographer!,
-                color: photo.avgColor!,
-                photographerUrl: photo.photographerUrl!
-            );*/
-                      },
-                      staggeredTileBuilder: (index) => StaggeredTile.fit(1),
-                    ),
-                  )),
-      ],
-    ));
+          ),
+          title: Row(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                      'https://images.pexels.com/photos/3536991/pexels-photo-3536991.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
+                  //backgroundColor: Colors.transparent,
+                ),
+              ),
+              Text(
+                "Abdullah ",
+                style: Theme.of(context).textTheme.headline6,
+              )
+            ],
+          ),
+          actions: [
+            Container(
+              child: ChangeThemeButtonWidget(),
+              margin: EdgeInsets.all(3),
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.circular(50)),
+            ),
+          ],
+        ),
+        body: myPhotos!.isEmpty
+            ? EmptyPage()
+            : Container(
+                margin: EdgeInsets.only(top: 10),
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: StaggeredGridView.countBuilder(
+                  primary: false,
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 15,
+                  crossAxisSpacing: 15,
+                  itemCount: myPhotos!.length,
+                  itemBuilder: (context, index) {
+                    var photo = myPhotos![index];
+                    return SlideFadeAnimation(
+                      index: index,
+                      animationDuration: 2000,
+                      verticalOffset: 200,
+                      child: FavoriteCardImage(index: index, photo: photo),
+                    );
+                  },
+                  staggeredTileBuilder: (index) => StaggeredTile.fit(1),
+                ),
+              ));
   }
 }

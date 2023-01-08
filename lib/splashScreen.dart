@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: Image.asset('assets/cap.PNG',fit: BoxFit.fill,),
+        child: Image.asset('assets/images/wallpaper.png',fit: BoxFit.fill,),
       ),
     );
   }
