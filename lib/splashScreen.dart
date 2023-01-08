@@ -6,7 +6,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:wallpaper/pages/home.dart';
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key key}) : super(key: key);
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     //Provider.of<WallpaperHelper>(context,listen: false);
     Timer(
         Duration(
-          seconds: 2,
+          seconds: 1,
         ),
             () => Navigator.pushReplacement(
             context,

@@ -7,11 +7,11 @@ import 'package:wallpaper/provider/theme_provider.dart';
 import 'package:wallpaper/splashScreen.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding w = await WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences pref = await SharedPreferences.getInstance();
+  WidgetsBinding w = await WidgetsFlutterBinding.ensureInitialized();
+  //SharedPreferences pref = await SharedPreferences.getInstance();
   //List photo = pref.getStringList('favo_Photos');
- // print(photo.toString());
-  
+  // print(photo.toString());
+
   runApp(MyApp());
 }
 
@@ -19,18 +19,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-              //themeMode: Provider.of<ThemeProvider>(context).themeMode,
-              theme: MyThemes.lightTheme,
-              darkTheme: MyThemes.darkTheme,
-        home: SplashScreen(),
+      child: ChangeNotifierProvider(
+        create: (context) => ThemeProvider(),
+        builder: (context, _) {
+          final themeProvider = Provider.of<ThemeProvider>(context);
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            themeMode: Provider.of<ThemeProvider>(context).themeMode,
+            theme: MyThemes.lightTheme,
+            darkTheme: MyThemes.darkTheme,
+            home: SplashScreen(),
+          );
+        },
       ),
       providers: [
         ChangeNotifierProvider(create: (_) => ProviderHelper()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
       ],
     );
-
   }
 }

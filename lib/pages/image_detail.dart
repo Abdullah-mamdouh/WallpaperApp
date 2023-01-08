@@ -1,27 +1,20 @@
+
 import 'dart:typed_data';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:image_picker_saver/image_picker_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:image_downloader/image_downloader.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:wallpaper/provider/ProviderHelper.dart';
-import 'package:wallpaper_manager/wallpaper_manager.dart';
-import 'package:http/http.dart' as http;
 
 class ImageDetail extends StatefulWidget {
-  ImageDetail({Key key,this.photo, this.image, this.photographer, this.photographerUrl}) : super(key: key);
+  ImageDetail({Key? key,
+    this.photo,
+    //required this.image, required this.photographer, required this.photographerUrl
+  }) : super(key: key);
 
-  final String image, photographer,photographerUrl;
+  //final String image, photographer,photographerUrl;
   final photo;
   @override
   _ImageDetailState createState() => _ImageDetailState();
@@ -29,7 +22,7 @@ class ImageDetail extends StatefulWidget {
 
 class _ImageDetailState extends State<ImageDetail> {
   bool isfavourite = false;
-  List fav = new List();
+  List fav = [];
 
   @override
   void initState() {
@@ -77,18 +70,19 @@ class _ImageDetailState extends State<ImageDetail> {
       body: Stack(
         children: <Widget>[
           Hero(
-            tag: widget.image,
+            tag: widget.photo.src!.large2x!,
             child: Container(
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: CachedNetworkImage(
-                  imageUrl: widget.image,
+                  imageUrl: widget.photo.src!.large2x!,
                   placeholder: (context, url) => Container(
-                        color: Color(0xfff5f8fd),
-                      ),
+                    color: Color(0xfff5f8fd),
+                  ),
                   fit: BoxFit.cover),
             ),
           ),
+
           Container(
             margin: EdgeInsets.only(left: 5, top:60),
             child: Row(
@@ -134,12 +128,12 @@ class _ImageDetailState extends State<ImageDetail> {
                               ),
                               onPressed: () async {
                                 _save(widget.photo.src.large2x);
-                                Scaffold.of(context)
+                                ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(content: Text('Photo is downloaded.')));
                               }),
                           Text(
                             "Download",
-                            style: Theme.of(context).textTheme.caption.apply(color: Colors.white),
+                            style: Theme.of(context).textTheme.caption!.apply(color: Colors.white),
                             textAlign: TextAlign.center,
                           )
                         ],
@@ -147,39 +141,31 @@ class _ImageDetailState extends State<ImageDetail> {
                     ),
                   ),
                   Expanded(
-                    child: GestureDetector(
-                      onTap: () async {
-                        Provider.of<ProviderHelper>(
-                            context,
-                            listen: false)
-                            .favorite(!isfavourite);
-                        isfavourite = Provider.of<ProviderHelper>(context, listen: false).isFavorite;
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                      Consumer<ProviderHelper>(
-                      builder: (context, pp, child) =>IconButton(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Consumer<ProviderHelper>(
+                          builder: (context, pp, child) =>IconButton(
                               icon: isfavourite ? Icon(Icons.favorite,color: Colors.red,size: 40,)
                                   : Icon(Icons.favorite_border_outlined,color: Colors.white,size: 40,),
                               onPressed: () {
                                 fav.add(widget.photo.src.large2x);
                                 Provider.of<ProviderHelper>(
                                     context,
-                                    listen: false)
-                                    .favorite(!isfavourite);
+                                    listen: false).favorite(!isfavourite);
                                 isfavourite = pp.isFavorite;
 
-                                addPhotoToFavorite(widget.photo.src.large2x);
+                                /// add this image to favourite photos
+                                Provider.of<ProviderHelper>(context,
+                                    listen: false).addFavouritePhoto(widget.photo);
                               }),),
-                          Text(
-                            "Favorite",
-                            style: Theme.of(context).textTheme.caption.apply(color: Colors.white),
-                            textAlign: TextAlign.center,
-                          )
-                        ],
-                      ),
+                        Text(
+                          "Favorite",
+                          style: Theme.of(context).textTheme.caption!.apply(color: Colors.white),
+                          textAlign: TextAlign.center,
+                        )
+                      ],
                     ),
                   ),
 
@@ -201,16 +187,19 @@ class _ImageDetailState extends State<ImageDetail> {
           Uint8List.fromList(response.data),
           quality: 60,
           name: "photo");
-      print(result);
+      //print(result);
     }
   }
-  addPhotoToFavorite(List photo) async{
-    WidgetsFlutterBinding w = await WidgetsFlutterBinding.ensureInitialized();
+
+/*
+  addPhotoToFavorite(String photo) async{
+    WidgetsBinding w = await WidgetsFlutterBinding.ensureInitialized();
     SharedPreferences pref = await SharedPreferences.getInstance();
-    List  favorite_img = pref.getStringList('favo_Photos');
-      favorite_img.add(photo);
+    List<String>? favorite_img = pref.getStringList('favo_Photos');
+      favorite_img!.add(photo);
       print(favorite_img[0].toString());
       pref.setStringList('favo_Photos', favorite_img);
 
   }
+  */
 }

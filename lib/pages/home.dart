@@ -2,18 +2,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import 'package:wallpaper/pages/homepage.dart';
-import 'package:wallpaper/pages/favorites.dart';
+import 'package:wallpaper/pages/favourite_image/favorites.dart';
+
+import 'categories_page.dart';
 
 
 class Home extends StatefulWidget {
-  const Home({Key key}) : super(key: key);
+  const Home({Key? key}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  List<Widget> _widgetOptions = <Widget>[HomePage(), Favorites()];
+  List<Widget> _widgetOptions = <Widget>[HomePage(), CategoryPage(), Favorites()
+  ];
 
   ShapeBorder bottomBarShape = const RoundedRectangleBorder(
     borderRadius: BorderRadius.all(Radius.circular(25)),
@@ -44,6 +47,7 @@ class _HomeState extends State<Home> {
         onTap: (index) => setState(() => _selectedItemPosition = index),
         items: [
           const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          const BottomNavigationBarItem(icon: Icon(Icons.category), label: 'Category'),
           const BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorites'),
         ],
         selectedLabelStyle: const TextStyle(fontSize: 12),

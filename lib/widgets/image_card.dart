@@ -8,37 +8,47 @@ import 'package:wallpaper/provider/ProviderHelper.dart';
 import 'package:wallpaper/constant_utils/constants.dart';
 
 class ImageCard extends StatelessWidget {
-   ImageCard({Key key,this.photo, this.imageUrl, this.photographer, this.color, this.imageDetail, this.photographerUrl}) : super(key: key);
+  ImageCard(
+      {Key? key,
+        required this.photo,
+        // required this.imageUrl,
+        // required this.photographer,
+        // required this.color,
+        // required this.imageDetail,
+        // required this.photographerUrl
+      })
+      : super(key: key);
 
-  final String imageUrl, photographer, color, imageDetail, photographerUrl;
+  //final String imageUrl, photographer, color, imageDetail, photographerUrl;
   Photos photo;
-   bool isfavourite = false;
+  bool isfavourite = false;
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(15.0), color: Theme.of(context).cardColor),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15.0),
+          color: Theme.of(context).cardColor),
       child: Column(
         children: [
           GestureDetector(
             onTap: () {
-              print(imageDetail);
+              print(photo.src!.large2x!);
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => ImageDetail(
                         photo: photo,
-                        photographer: photographer,
-                            image: imageDetail,
-                        photographerUrl: photographerUrl,
-                          )));
+                        // photographer: photographer,
+                        // image: imageDetail,
+                        // photographerUrl: photographerUrl,
+                      )));
             },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15.0),
               child: FadeInImage.memoryNetwork(
                 imageScale: 0.5,
                 placeholder: kTransparentImage,
-                image: imageUrl,
+                image: photo.src!.medium!,
               ),
             ),
           ),
@@ -46,19 +56,30 @@ class ImageCard extends StatelessWidget {
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(right: 5, left: 15, top: 5, bottom: 5),
+                  padding: const EdgeInsets.only(
+                      right: 5, left: 15, top: 5, bottom: 5),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-    Consumer<ProviderHelper>(
-    builder: (context, pp, child) => IconButton(onPressed: (){
-                        Provider.of<ProviderHelper>(
-                          context,
-                          listen: false)
-                          .favorite(!isfavourite);
-                      isfavourite = pp.isFavorite;
-                      },
-                          icon: isfavourite? Icon(Icons.favorite,color: Colors.red,) : Icon(Icons.favorite_border_outlined,)),),
+                      Consumer<ProviderHelper>(
+                        builder: (context, pp, child) => IconButton(
+                            onPressed: () {
+                              Provider.of<ProviderHelper>(context,
+                                  listen: false)
+                                  .favorite(!isfavourite);
+                              isfavourite = pp.isFavorite;
+                              Provider.of<ProviderHelper>(context,
+                                  listen: false).addFavouritePhoto(photo);
+                            },
+                            icon: isfavourite
+                                ? Icon(
+                              Icons.favorite,
+                              color: Colors.red,
+                            )
+                                : Icon(
+                              Icons.favorite_border_outlined,
+                            )),
+                      ),
                     ],
                   ),
                 ),
@@ -70,7 +91,7 @@ class ImageCard extends StatelessWidget {
                 margin: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: HexColor(color),
+                  color: HexColor(photo.avgColor!),
                 ),
               ),
             ],

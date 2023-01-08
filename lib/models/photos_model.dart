@@ -1,20 +1,20 @@
 class PhotosModel {
-  int page;
-  int perPage;
-  List<Photos> photos;
-  int totalResults;
-  String nextPage;
+  int? page;
+  int? perPage;
+  List<Photos>? photos;
+  int? totalResults;
+  String? nextPage;
 
   PhotosModel(
-      {this.page, this.perPage, this.photos, this.totalResults, this.nextPage});
+      {required this.page, required this.perPage, required this.photos, required this.totalResults, required this.nextPage});
 
   PhotosModel.fromJson(Map<String, dynamic> json) {
     page = json['page'];
     perPage = json['per_page'];
     if (json['photos'] != null) {
-      photos = new List<Photos>();
+      photos = [];
       json['photos'].forEach((v) {
-        photos.add(new Photos.fromJson(v));
+        photos?.add(new Photos.fromJson(v));
       });
     }
     totalResults = json['total_results'];
@@ -26,7 +26,7 @@ class PhotosModel {
     data['page'] = this.page;
     data['per_page'] = this.perPage;
     if (this.photos != null) {
-      data['photos'] = this.photos.map((v) => v.toJson()).toList();
+      data['photos'] = this.photos!.map((v) => v.toJson()).toList();
     }
     data['total_results'] = this.totalResults;
     data['next_page'] = this.nextPage;
@@ -35,26 +35,26 @@ class PhotosModel {
 }
 
 class Photos {
-  int id;
-  int width;
-  int height;
-  String url;
-  String photographer;
-  String photographerUrl;
-  int photographerId;
-  String avgColor;
-  Src src;
+  int? id;
+  int? width;
+  int? height;
+  String? url;
+  String? photographer;
+  String? photographerUrl;
+  int? photographerId;
+  String? avgColor;
+  Src? src;
 
   Photos(
-      {this.id,
-        this.width,
-        this.height,
-        this.url,
-        this.photographer,
-        this.photographerUrl,
-        this.photographerId,
-        this.avgColor,
-        this.src});
+      {required this.id,
+        required this.width,
+        required this.height,
+        required this.url,
+        required this.photographer,
+        required this.photographerUrl,
+        required this.photographerId,
+        required this.avgColor,
+        required this.src});
 
   Photos.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -79,31 +79,31 @@ class Photos {
     data['photographer_id'] = this.photographerId;
     data['avg_color'] = this.avgColor;
     if (this.src != null) {
-      data['src'] = this.src.toJson();
+      data['src'] = this.src!.toJson();
     }
     return data;
   }
 }
 
 class Src {
-  String original;
-  String large2x;
-  String large;
-  String medium;
-  String small;
-  String portrait;
-  String landscape;
-  String tiny;
+  String? original;
+  String? large2x;
+  String? large;
+  String? medium;
+  String? small;
+  String? portrait;
+  String? landscape;
+  String? tiny;
 
   Src(
-      {this.original,
-        this.large2x,
-        this.large,
-        this.medium,
-        this.small,
-        this.portrait,
-        this.landscape,
-        this.tiny});
+      {required this.original,
+        required this.large2x,
+        required this.large,
+        required this.medium,
+        required this.small,
+        required this.portrait,
+        required this.landscape,
+        required this.tiny});
 
   Src.fromJson(Map<String, dynamic> json) {
     original = json['original'];

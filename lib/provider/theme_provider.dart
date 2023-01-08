@@ -6,7 +6,7 @@ class ThemeProvider extends ChangeNotifier {
 
   bool get isDarkMode {
     if (themeMode == ThemeMode.system) {
-      final brightness = SchedulerBinding.instance.window.platformBrightness;
+      final brightness = SchedulerBinding.instance!.window.platformBrightness;
       return brightness == Brightness.dark;
     } else {
       return themeMode == ThemeMode.dark;
@@ -22,7 +22,7 @@ class ThemeProvider extends ChangeNotifier {
 class MyThemes {
 
   static final darkTheme = ThemeData(
-    fontFamily: 'Montserrat',
+    fontFamily: 'DancingScript',
     scaffoldBackgroundColor: Colors.grey.shade900,
     primaryColor: Colors.black,
     colorScheme: ColorScheme.dark(),
@@ -34,7 +34,7 @@ class MyThemes {
   );
 
   static final lightTheme = ThemeData(
-    fontFamily: 'Montserrat',
+    fontFamily: 'DancingScript',
     scaffoldBackgroundColor: Colors.white,
     primaryColor: Colors.white,
     colorScheme: ColorScheme.light(),
