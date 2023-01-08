@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
     //   closeSearch = true;
     // });
     if (_scrollController!.offset >=
-        _scrollController!.position.maxScrollExtent &&
+            _scrollController!.position.maxScrollExtent &&
         !_scrollController!.position.outOfRange) {
       page = page! + 1;
       // Provider.of<ProviderHelper>(context, listen: false).setPage(page! + 1);
@@ -136,26 +136,26 @@ class _HomePageState extends State<HomePage> {
                     children: <Widget>[
                       Expanded(
                           child: TextField(
-                            textInputAction: TextInputAction.search,
-                            onSubmitted: (String value) {
-                              if (value.trim().isEmpty) {
-                                Fluttertoast.showToast(
-                                    msg: "Search field cannot be empty");
-                              } else {
-                                closeSearch = true;
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SearchPage(
+                        textInputAction: TextInputAction.search,
+                        onSubmitted: (String value) {
+                          if (value.trim().isEmpty) {
+                            Fluttertoast.showToast(
+                                msg: "Search field cannot be empty");
+                          } else {
+                            closeSearch = true;
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SearchPage(
                                           keyword: searchController.text,
                                         )));
-                              }
-                            },
-                            controller: searchController,
-                            decoration: InputDecoration(
-                                hintText: "search wallpapers",
-                                border: InputBorder.none),
-                          )),
+                          }
+                        },
+                        controller: searchController,
+                        decoration: InputDecoration(
+                            hintText: "search wallpapers",
+                            border: InputBorder.none),
+                      )),
                     ],
                   ),
                 ),
@@ -166,47 +166,15 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         body: //myPhotos.isNotEmpty ?
-        myPhotos.isEmpty
-            ? Center(
-          child: CircularProgressIndicator(),
-        )
-            : ImagesViewWidget(
-          myPhotos: myPhotos,
-          scrollController: _scrollController,
-        )
+            myPhotos.isEmpty
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : ImagesViewWidget(
+                    myPhotos: myPhotos,
+                    scrollController: _scrollController,
+                  ),
 
-      /*Container(
-        margin: EdgeInsets.only(top: 10),
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: StaggeredGridView.countBuilder(
-          controller: _scrollController,
-          primary: false,
-          crossAxisCount: 2,
-          mainAxisSpacing: 15,
-          crossAxisSpacing: 15,
-          itemCount: myPhotos.length,
-          itemBuilder: (context, index) {
-            var photo = myPhotos[index];
-            if(index != myPhotos.length-1){
-              return ImageCard(
-                  photo: photo,
-                  imageDetail: photo.src!.large2x!,
-                  imageUrl: photo.src!.medium!,
-                  photographer: photo.photographer!,
-                  color: photo.avgColor!,
-                  photographerUrl: photo.photographerUrl!);
-            }else{
-              return const Padding(
-                padding: EdgeInsets.symmetric(vertical: 32.0,horizontal: 32.0),
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            }
-          },
-          staggeredTileBuilder: (index) => StaggeredTile.fit(1),
-        ),
-      ),*/
-    );
+        );
   }
 }
