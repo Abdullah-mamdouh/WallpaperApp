@@ -6,18 +6,20 @@ import 'package:wallpaper/service/api.dart';
 import 'package:wallpaper/models/photos_model.dart';
 import 'package:wallpaper/widgets/image_card.dart';
 
+import '../widgets/images_view_widget.dart';
+
 class SearchPage extends StatefulWidget {
   final String keyword;
 
-  const SearchPage({Key key, this.keyword}) : super(key: key);
+  const SearchPage({Key? key, required this.keyword}) : super(key: key);
 
   @override
   _SearchViewState createState() => _SearchViewState();
 }
 
 class _SearchViewState extends State<SearchPage> {
-  ScrollController _scrollController;
-  List<Photos> myPhotos = new List();
+  ScrollController? _scrollController;
+  List<Photos> myPhotos = [];
   int page = 1;
 
   @override
@@ -28,33 +30,34 @@ class _SearchViewState extends State<SearchPage> {
   }
 
   fetchPhotos() async {
-    var response = await getRandomWallpaper(page-1, widget.keyword, page);
-    response.photos.length != 0
-        ? response.photos.forEach((element) {
-            myPhotos.add(element);
-          })
+    var response = await getRandomWallpaper(5, widget.keyword, page);
+    debugPrint(response.toJson().toString());
+    response.photos!.length != 0
+        ? response.photos!.forEach((element) {
+      myPhotos.add(element);
+    })
         : Fluttertoast.showToast(msg: "Search Keyword not valid");
 
     setState(() {});
   }
 
   _scrollListener() {
-    if (_scrollController.offset >= _scrollController.position.maxScrollExtent &&
-        !_scrollController.position.outOfRange) {
-      page++;
-
+    if (_scrollController!.offset >= _scrollController!.position.maxScrollExtent &&
+        !_scrollController!.position.outOfRange) {
+      page = page +1;
       fetchPhotos();
     }
   }
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    _scrollController!.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    print(page);
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
@@ -76,7 +79,9 @@ class _SearchViewState extends State<SearchPage> {
         ),
         centerTitle: true,
       ),
-      body: Container(
+      body: ImagesViewWidget(myPhotos: myPhotos, scrollController: _scrollController,),
+
+      /*Container(
         margin: EdgeInsets.only(top: 10),
         padding: EdgeInsets.symmetric(horizontal: 10),
         child: StaggeredGridView.countBuilder(
@@ -87,18 +92,20 @@ class _SearchViewState extends State<SearchPage> {
           crossAxisSpacing: 10,
           itemCount: myPhotos.length,
           itemBuilder: (context, index) {
+            var photo = myPhotos[index];
             return ImageCard(
-              imageDetail:
-                  myPhotos[index].src.large2x,
-              imageUrl: myPhotos[index].src.medium,
-              photographer: myPhotos[index].photographer,
-              color: myPhotos[index].avgColor,
-              photographerUrl: myPhotos[index].photographerUrl
+                imageDetail: photo.src!.large2x!,
+                imageUrl: photo.src!.medium!,
+                photographer: photo.photographer!,
+                color:photo.avgColor!,
+                photographerUrl: photo.photographerUrl!,
+                photo: photo,
             );
           },
           staggeredTileBuilder: (index) => StaggeredTile.fit(1),
         ),
-      ),
+      ),*/
+
     );
   }
 }
