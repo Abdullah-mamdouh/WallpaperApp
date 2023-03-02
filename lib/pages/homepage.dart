@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
     final helper = Provider.of<ProviderHelper>(context, listen: false);
     helper.getData();
     page = random.nextInt(100);
-    _scrollController = new ScrollController(initialScrollOffset: 10.0)
+    _scrollController = new ScrollController(initialScrollOffset: 5.0)
       ..addListener(_scrollListener);
     //Provider.of<ProviderHelper>(context, listen: false).getData();
     //Provider.of<ProviderHelper>(context, listen: false).favorite_img;

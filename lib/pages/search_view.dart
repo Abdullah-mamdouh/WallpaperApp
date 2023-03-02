@@ -81,31 +81,6 @@ class _SearchViewState extends State<SearchPage> {
       ),
       body: ImagesViewWidget(myPhotos: myPhotos, scrollController: _scrollController,),
 
-      /*Container(
-        margin: EdgeInsets.only(top: 10),
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: StaggeredGridView.countBuilder(
-          controller: _scrollController,
-          primary: false,
-          crossAxisCount: 2,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          itemCount: myPhotos.length,
-          itemBuilder: (context, index) {
-            var photo = myPhotos[index];
-            return ImageCard(
-                imageDetail: photo.src!.large2x!,
-                imageUrl: photo.src!.medium!,
-                photographer: photo.photographer!,
-                color:photo.avgColor!,
-                photographerUrl: photo.photographerUrl!,
-                photo: photo,
-            );
-          },
-          staggeredTileBuilder: (index) => StaggeredTile.fit(1),
-        ),
-      ),*/
-
     );
   }
 }
