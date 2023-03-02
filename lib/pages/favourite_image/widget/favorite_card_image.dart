@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../constant_utils/constants.dart';
 import '../../../models/photos_model.dart';
 import '../../../provider/ProviderHelper.dart';
-import '../../image_detail.dart';
+import '../../details_page/image_detail.dart';
 
 class FavoriteCardImage extends StatelessWidget {
   FavoriteCardImage({

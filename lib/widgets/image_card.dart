@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:provider/provider.dart';
 import 'package:wallpaper/models/photos_model.dart';
-import 'package:wallpaper/pages/image_detail.dart';
+import 'package:wallpaper/pages/details_page/image_detail.dart';
 import 'package:wallpaper/provider/ProviderHelper.dart';
 import 'package:wallpaper/constant_utils/constants.dart';
 
