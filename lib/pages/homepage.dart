@@ -84,97 +84,96 @@ class _HomePageState extends State<HomePage> {
     myPhotos = Provider.of<ProviderHelper>(context).myPhotos;
     //debugPrint(page.toString());
     return Scaffold(
-        extendBodyBehindAppBar: true,
-        extendBody: true,
-        appBar: AppBar(
-          elevation: 0,
-          toolbarHeight: 65,
-          backgroundColor: Theme.of(context).cardColor.withOpacity(0.8),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(50),
-            ),
+      extendBodyBehindAppBar: true,
+      extendBody: true,
+      appBar: AppBar(
+        elevation: 0,
+        toolbarHeight: 65,
+        backgroundColor: Theme.of(context).cardColor.withOpacity(0.8),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(50),
           ),
-          centerTitle: true,
-          title: Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: RichText(
-              text: new TextSpan(
-                children: [
-                  new TextSpan(
-                    text: 'Fantastic Wallpaper',
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                ],
-              ),
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          actions: [
-            AnimatedCrossFade(
-                firstChild: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                  padding: EdgeInsets.symmetric(horizontal: 5),
-                  child: IconButton(
-                      padding: EdgeInsets.only(right: 30),
-                      icon: Icon(Icons.search, size: 30),
-                      onPressed: () {
-                        setState(() {
-                          closeSearch = false;
-                        });
-                      }),
-                ),
-                secondChild: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                          child: TextField(
-                        textInputAction: TextInputAction.search,
-                        onSubmitted: (String value) {
-                          if (value.trim().isEmpty) {
-                            Fluttertoast.showToast(
-                                msg: "Search field cannot be empty");
-                          } else {
-                            closeSearch = true;
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SearchPage(
-                                          keyword: searchController.text,
-                                        )));
-                          }
-                        },
-                        controller: searchController,
-                        decoration: InputDecoration(
-                            hintText: "search wallpapers",
-                            border: InputBorder.none),
-                      )),
-                    ],
-                  ),
-                ),
-                crossFadeState: closeSearch
-                    ? CrossFadeState.showFirst
-                    : CrossFadeState.showSecond,
-                duration: const Duration(milliseconds: 400))
-          ],
         ),
-        body: //myPhotos.isNotEmpty ?
-            myPhotos.isEmpty
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : ImagesViewWidget(
-                    myPhotos: myPhotos,
-                    scrollController: _scrollController,
-                  ),
-
-        );
+        centerTitle: true,
+        title: Padding(
+          padding: const EdgeInsets.only(left: 20),
+          child: RichText(
+            text: new TextSpan(
+              children: [
+                new TextSpan(
+                  text: 'Fantastic Wallpaper',
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+              ],
+            ),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        actions: [
+          AnimatedCrossFade(
+              firstChild: Container(
+                margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                child: IconButton(
+                    padding: EdgeInsets.only(right: 30),
+                    icon: Icon(Icons.search, size: 30),
+                    onPressed: () {
+                      setState(() {
+                        closeSearch = false;
+                      });
+                    }),
+              ),
+              secondChild: Container(
+                margin: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                width: MediaQuery.of(context).size.width * 0.5,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                        child: TextField(
+                      textInputAction: TextInputAction.search,
+                      onSubmitted: (String value) {
+                        if (value.trim().isEmpty) {
+                          Fluttertoast.showToast(
+                              msg: "Search field cannot be empty");
+                        } else {
+                          closeSearch = true;
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SearchPage(
+                                        keyword: searchController.text,
+                                      )));
+                        }
+                      },
+                      controller: searchController,
+                      decoration: InputDecoration(
+                          hintText: "search wallpapers",
+                          border: InputBorder.none),
+                    )),
+                  ],
+                ),
+              ),
+              crossFadeState: closeSearch
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond,
+              duration: const Duration(milliseconds: 400))
+        ],
+      ),
+      body: //myPhotos.isNotEmpty ?
+          myPhotos.isEmpty
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : ImagesViewWidget(
+                  myPhotos: myPhotos,
+                  scrollController: _scrollController,
+                ),
+    );
   }
 }

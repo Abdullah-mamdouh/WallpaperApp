@@ -31,7 +31,8 @@ class _ImageDetailState extends State<ImageDetail> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Provider.of<ProviderHelper>(context,listen: false).requestPermission(context);
+    Provider.of<ProviderHelper>(context, listen: false)
+        .requestPermission(context);
   }
 
   _requestPermission() async {
@@ -118,15 +119,19 @@ class _ImageDetailState extends State<ImageDetail> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   MyIconButton(
-                      icon: Icons.download_rounded,
-                      iconName: 'Download',
-                      action: () =>
-                          Provider.of<ProviderHelper>(context,listen: false).save(image.large2x),),
+                    icon: Icons.download_rounded,
+                    iconName: 'Download',
+                    action: () =>
+                        Provider.of<ProviderHelper>(context, listen: false)
+                            .save(image.large2x),
+                  ),
                   MyIconButton(
-                      icon: Icons.wallpaper,
-                      iconName: 'set Wallpaper',
-                      action: () => Provider.of<ProviderHelper>(context,listen: false)
-                          .setwallpaper(image.large2x),),
+                    icon: Icons.wallpaper,
+                    iconName: 'set Wallpaper',
+                    action: () =>
+                        Provider.of<ProviderHelper>(context, listen: false)
+                            .setwallpaper(image.large2x),
+                  ),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

@@ -1,6 +1,4 @@
-
-
-class CategoryModel{
+class CategoryModel {
   final String label;
   final String imageUrl;
 

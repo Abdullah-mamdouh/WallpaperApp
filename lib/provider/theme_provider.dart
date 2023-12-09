@@ -20,7 +20,6 @@ class ThemeProvider extends ChangeNotifier {
 }
 
 class MyThemes {
-
   static final darkTheme = ThemeData(
     fontFamily: 'DancingScript',
     scaffoldBackgroundColor: Colors.grey.shade900,
