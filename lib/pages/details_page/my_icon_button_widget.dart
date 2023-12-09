@@ -1,8 +1,12 @@
-
 import 'package:flutter/material.dart';
 
 class MyIconButton extends StatefulWidget {
-  MyIconButton({Key? key, required this.icon, required this.iconName, required this.action}) : super(key: key);
+  MyIconButton(
+      {Key? key,
+      required this.icon,
+      required this.iconName,
+      required this.action})
+      : super(key: key);
   IconData icon;
   String iconName;
   Function action;
@@ -14,7 +18,7 @@ class MyIconButton extends StatefulWidget {
 class _MyIconButtonState extends State<MyIconButton> {
   @override
   Widget build(BuildContext context) {
-    return  Expanded(
+    return Expanded(
       child: GestureDetector(
         onTap: () {
           widget.action();
@@ -41,7 +45,10 @@ class _MyIconButtonState extends State<MyIconButton> {
                 }),
             Text(
               "${widget.iconName}",
-              style: Theme.of(context).textTheme.caption!.apply(color: Colors.white),
+              style: Theme.of(context)
+                  .textTheme
+                  .caption!
+                  .apply(color: Colors.white),
               textAlign: TextAlign.center,
             )
           ],

@@ -2,8 +2,6 @@ import 'dart:typed_data';
 
 import '../models/category_model.dart';
 
-
-
 var categoriesList = [
   "Nature",
   "Beach",

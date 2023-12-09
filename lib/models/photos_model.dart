@@ -6,7 +6,11 @@ class PhotosModel {
   String? nextPage;
 
   PhotosModel(
-      {required this.page, required this.perPage, required this.photos, required this.totalResults, required this.nextPage});
+      {required this.page,
+      required this.perPage,
+      required this.photos,
+      required this.totalResults,
+      required this.nextPage});
 
   PhotosModel.fromJson(Map<String, dynamic> json) {
     page = json['page'];
@@ -47,14 +51,14 @@ class Photos {
 
   Photos(
       {required this.id,
-        required this.width,
-        required this.height,
-        required this.url,
-        required this.photographer,
-        required this.photographerUrl,
-        required this.photographerId,
-        required this.avgColor,
-        required this.src});
+      required this.width,
+      required this.height,
+      required this.url,
+      required this.photographer,
+      required this.photographerUrl,
+      required this.photographerId,
+      required this.avgColor,
+      required this.src});
 
   Photos.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -97,13 +101,13 @@ class Src {
 
   Src(
       {required this.original,
-        required this.large2x,
-        required this.large,
-        required this.medium,
-        required this.small,
-        required this.portrait,
-        required this.landscape,
-        required this.tiny});
+      required this.large2x,
+      required this.large,
+      required this.medium,
+      required this.small,
+      required this.portrait,
+      required this.landscape,
+      required this.tiny});
 
   Src.fromJson(Map<String, dynamic> json) {
     original = json['original'];

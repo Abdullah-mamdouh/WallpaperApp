@@ -1,13 +1,7 @@
+abstract class Failure {}
 
+class OfflineFailure extends Failure {}
 
-abstract class Failure{}
+class ServerFailure extends Failure {}
 
-class OfflineFailure extends Failure {
-}
-
-class ServerFailure extends Failure {
-}
-
-class EmptyCacheFailure extends Failure {
-}
-
+class EmptyCacheFailure extends Failure {}

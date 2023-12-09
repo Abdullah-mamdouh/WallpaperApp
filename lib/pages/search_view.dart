@@ -24,7 +24,8 @@ class _SearchViewState extends State<SearchPage> {
 
   @override
   void initState() {
-    _scrollController = new ScrollController(initialScrollOffset: 5.0)..addListener(_scrollListener);
+    _scrollController = new ScrollController(initialScrollOffset: 5.0)
+      ..addListener(_scrollListener);
     fetchPhotos();
     super.initState();
   }
@@ -34,17 +35,18 @@ class _SearchViewState extends State<SearchPage> {
     debugPrint(response.toJson().toString());
     response.photos!.length != 0
         ? response.photos!.forEach((element) {
-      myPhotos.add(element);
-    })
+            myPhotos.add(element);
+          })
         : Fluttertoast.showToast(msg: "Search Keyword not valid");
 
     setState(() {});
   }
 
   _scrollListener() {
-    if (_scrollController!.offset >= _scrollController!.position.maxScrollExtent &&
+    if (_scrollController!.offset >=
+            _scrollController!.position.maxScrollExtent &&
         !_scrollController!.position.outOfRange) {
-      page = page +1;
+      page = page + 1;
       fetchPhotos();
     }
   }
@@ -79,8 +81,10 @@ class _SearchViewState extends State<SearchPage> {
         ),
         centerTitle: true,
       ),
-      body: ImagesViewWidget(myPhotos: myPhotos, scrollController: _scrollController,),
-
+      body: ImagesViewWidget(
+        myPhotos: myPhotos,
+        scrollController: _scrollController,
+      ),
     );
   }
 }

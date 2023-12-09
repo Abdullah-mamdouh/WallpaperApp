@@ -57,7 +57,8 @@ class FavoriteCardImage extends StatelessWidget {
                     children: [
                       IconButton(
                         onPressed: () {
-                          Provider.of<ProviderHelper>(context, listen: false).removeFavoritePhoto(index);
+                          Provider.of<ProviderHelper>(context, listen: false)
+                              .removeFavoritePhoto(index);
                         },
                         icon: Icon(
                           Icons.delete_outline_outlined,
@@ -75,7 +76,9 @@ class FavoriteCardImage extends StatelessWidget {
                 margin: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: HexColor( photo.avgColor!,),
+                  color: HexColor(
+                    photo.avgColor!,
+                  ),
                 ),
               ),
             ],

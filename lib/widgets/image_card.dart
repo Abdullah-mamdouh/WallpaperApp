@@ -8,16 +8,15 @@ import 'package:wallpaper/provider/ProviderHelper.dart';
 import 'package:wallpaper/constant_utils/constants.dart';
 
 class ImageCard extends StatelessWidget {
-  ImageCard(
-      {Key? key,
-        required this.photo,
-        // required this.imageUrl,
-        // required this.photographer,
-        // required this.color,
-        // required this.imageDetail,
-        // required this.photographerUrl
-      })
-      : super(key: key);
+  ImageCard({
+    Key? key,
+    required this.photo,
+    // required this.imageUrl,
+    // required this.photographer,
+    // required this.color,
+    // required this.imageDetail,
+    // required this.photographerUrl
+  }) : super(key: key);
 
   //final String imageUrl, photographer, color, imageDetail, photographerUrl;
   Photos photo;
@@ -37,11 +36,11 @@ class ImageCard extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) => ImageDetail(
-                        photo: photo,
-                        // photographer: photographer,
-                        // image: imageDetail,
-                        // photographerUrl: photographerUrl,
-                      )));
+                            photo: photo,
+                            // photographer: photographer,
+                            // image: imageDetail,
+                            // photographerUrl: photographerUrl,
+                          )));
             },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15.0),
@@ -65,20 +64,21 @@ class ImageCard extends StatelessWidget {
                         builder: (context, pp, child) => IconButton(
                             onPressed: () {
                               Provider.of<ProviderHelper>(context,
-                                  listen: false)
+                                      listen: false)
                                   .favorite(!isfavourite);
                               isfavourite = pp.isFavorite;
                               Provider.of<ProviderHelper>(context,
-                                  listen: false).addFavouritePhoto(photo);
+                                      listen: false)
+                                  .addFavouritePhoto(photo);
                             },
                             icon: isfavourite
                                 ? Icon(
-                              Icons.favorite,
-                              color: Colors.red,
-                            )
+                                    Icons.favorite,
+                                    color: Colors.red,
+                                  )
                                 : Icon(
-                              Icons.favorite_border_outlined,
-                            )),
+                                    Icons.favorite_border_outlined,
+                                  )),
                       ),
                     ],
                   ),

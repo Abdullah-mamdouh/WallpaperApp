@@ -6,7 +6,6 @@ import 'package:wallpaper/pages/favourite_image/favorites.dart';
 
 import 'categories_page.dart';
 
-
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -15,7 +14,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<Widget> _widgetOptions = <Widget>[HomePage(), CategoryPage(), Favorites()
+  List<Widget> _widgetOptions = <Widget>[
+    HomePage(),
+    CategoryPage(),
+    Favorites()
   ];
 
   ShapeBorder bottomBarShape = const RoundedRectangleBorder(
@@ -37,9 +39,12 @@ class _HomeState extends State<Home> {
         behaviour: snakeBarStyle,
         snakeShape: snakeShape,
         shape: bottomBarShape,
-        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.2, vertical: 20),
+        padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.2, vertical: 20),
         snakeViewColor: Theme.of(context).highlightColor,
-        selectedItemColor: snakeShape == SnakeShape.indicator ? Theme.of(context).cardColor : null,
+        selectedItemColor: snakeShape == SnakeShape.indicator
+            ? Theme.of(context).cardColor
+            : null,
         unselectedItemColor: Theme.of(context).cardColor.withOpacity(0.5),
         showUnselectedLabels: showUnselectedLabels,
         showSelectedLabels: showSelectedLabels,
@@ -47,8 +52,10 @@ class _HomeState extends State<Home> {
         onTap: (index) => setState(() => _selectedItemPosition = index),
         items: [
           const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          const BottomNavigationBarItem(icon: Icon(Icons.category), label: 'Category'),
-          const BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorites'),
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.category), label: 'Category'),
+          const BottomNavigationBarItem(
+              icon: Icon(Icons.favorite), label: 'Favorites'),
         ],
         selectedLabelStyle: const TextStyle(fontSize: 12),
         unselectedLabelStyle: const TextStyle(fontSize: 8),

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:wallpaper/widgets/slide_fade_animation.dart';
@@ -7,7 +6,9 @@ import '../models/photos_model.dart';
 import 'image_card.dart';
 
 class ImagesViewWidget extends StatelessWidget {
-  ImagesViewWidget({Key? key, required this.myPhotos, required this.scrollController}) : super(key: key);
+  ImagesViewWidget(
+      {Key? key, required this.myPhotos, required this.scrollController})
+      : super(key: key);
   ScrollController? scrollController;
   List<Photos> myPhotos;
 
@@ -27,7 +28,7 @@ class ImagesViewWidget extends StatelessWidget {
         itemCount: myPhotos.length,
         itemBuilder: (context, index) {
           var photo = myPhotos[index];
-          if(index != myPhotos.length-1){
+          if (index != myPhotos.length - 1) {
             return SlideFadeAnimation(
               index: index,
               animationDuration: 2000,
@@ -39,10 +40,11 @@ class ImagesViewWidget extends StatelessWidget {
                 // photographer: photo.photographer!,
                 // color: photo.avgColor!,
                 // photographerUrl: photo.photographerUrl!
-              ),);
-          }else{
+              ),
+            );
+          } else {
             return const Padding(
-              padding: EdgeInsets.symmetric(vertical: 32.0,horizontal: 32.0),
+              padding: EdgeInsets.symmetric(vertical: 32.0, horizontal: 32.0),
               child: Center(
                 child: CircularProgressIndicator(),
               ),
